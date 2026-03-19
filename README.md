@@ -6,6 +6,31 @@ A Node.js API built with **Express.js** following **Hexagonal Architecture** pri
 
 This project serves as a practical guide for implementing **Hexagonal Architecture** (Ports and Adapters) in Node.js using Express.js. The goal is to demonstrate how to structure a scalable, maintainable, and testable application by separating core business logic from external concerns.
 
+## Architecture 📐
+
+```
+src/
+├── domain/                     # Core Business Logic (Pure)
+│   ├── entities/              # Domain entities
+│   ├── repositories/          # Repository interfaces (Ports)
+│   ├── services/              # Domain services
+│   └── value-objects/         # Immutable value objects
+│
+├── application/               # Use Cases Layer
+│   ├── use-cases/             # Application use cases
+│   └── dtos/                  # Data Transfer Objects
+│
+├── infrastructure/            # External Adapters
+│   ├── adapters/
+│   │   ├── http/             # HTTP controllers
+│   │   └── persistence/      # Persistence adapters
+│   └── repositories/         # Repository implementations
+│
+├── config/                   # Configuration
+├── shared/                   # Shared utilities
+└── index.js                  # Entry point
+```
+
 ## Principles 💡
 
 - **Hexagonal Architecture**: Core domain independent of frameworks and external tools
