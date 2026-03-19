@@ -68,24 +68,57 @@ src/
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **Databases**: PostgreSQL + Non-relational database (future)
+- **Database**: PostgreSQL (with in-memory option)
 - **Deployment**: Cloud platform (AWS / GCP)
 
 ## Getting Started 🏃
 
+### Prerequisites
+- Node.js 18+
+- Docker & Docker Compose (for PostgreSQL)
+
+### Option 1: With Docker (Recommended) 🐳
+
 ```bash
+cp .env.example .env
+docker-compose up -d
+```
+
+The API will be available at `http://localhost:3000`
+
+### Option 2: Local Development
+
+```bash
+cp .env.example .env
 npm install
-npm start        # Production
-npm run dev      # Development (with watch mode)
+npm run dev      # In-memory storage
+```
+
+### Using PostgreSQL Locally
+
+Set `USE_DATABASE=postgres` in `.env`:
+
+```bash
+USE_DATABASE=postgres
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=hex_arch_db
+DB_USER=postgres
+DB_PASSWORD=postgres
 ```
 
 ## Environment Variables 🔧
 
-Copy `.env.example` to `.env` and configure:
-
-```bash
-cp .env.example .env
-```
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `NODE_ENV` | development | Environment mode |
+| `PORT` | 3000 | Server port |
+| `USE_DATABASE` | - | Set to `postgres` to use PostgreSQL |
+| `DB_HOST` | localhost | PostgreSQL host |
+| `DB_PORT` | 5432 | PostgreSQL port |
+| `DB_NAME` | hex_arch_db | Database name |
+| `DB_USER` | postgres | Database user |
+| `DB_PASSWORD` | postgres | Database password |
 
 ## License 📄
 
