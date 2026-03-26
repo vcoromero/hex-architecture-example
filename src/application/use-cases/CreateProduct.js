@@ -1,0 +1,29 @@
+const CreateProductCommand = require('../../dtos/CreateProductCommand');
+const ProductResponse = require('../../dtos/ProductResponse');
+const { Product, Money } = require('../../../domain');
+
+class CreateProduct {
+  constructor(productRepository, idGenerator) {
+    this.productRepository = productRepository;
+    this.idGenerator = idGenerator;
+  }
+
+  async execute(command) {
+    const createCommand = command instanceof CreateProductCommand 
+      ? command 
+      : new CreateProductCommand(command);
+
+    const product = new Product(
+      this.idGenerator.generate(),
+      createCommand.name,
+      createCommand.description,
+      new Money(createCommand.price, createCommand.currency),
+      createCommand.stock
+    );
+
+    const savedProduct = await this.productRepository.save(product);
+    return new ProductResponse(savedProduct);
+  }
+}
+
+module.exports = CreateProduct;
