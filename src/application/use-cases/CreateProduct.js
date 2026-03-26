@@ -3,8 +3,9 @@ const ProductResponse = require('../../dtos/ProductResponse');
 const { Product, Money } = require('../../../domain');
 
 class CreateProduct {
-  constructor(productRepository) {
+  constructor(productRepository, idGenerator) {
     this.productRepository = productRepository;
+    this.idGenerator = idGenerator;
   }
 
   async execute(command) {
@@ -13,7 +14,7 @@ class CreateProduct {
       : new CreateProductCommand(command);
 
     const product = new Product(
-      this.generateId(),
+      this.idGenerator.generate(),
       createCommand.name,
       createCommand.description,
       new Money(createCommand.price, createCommand.currency),
@@ -22,10 +23,6 @@ class CreateProduct {
 
     const savedProduct = await this.productRepository.save(product);
     return new ProductResponse(savedProduct);
-  }
-
-  generateId() {
-    return `prod_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 }
 

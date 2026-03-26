@@ -1,11 +1,11 @@
 const HttpController = require('./adapters/http/HttpController');
 const ProductController = require('./adapters/http/ProductController');
-const ProductRepositoryImpl = require('./repositories/ProductRepositoryImpl');
+const UuidAdapter = require('./adapters/id/UuidAdapter');
 const ProductRepositoryPostgresImpl = require('./repositories/ProductRepositoryPostgresImpl');
 
 module.exports = {
   HttpController,
   ProductController,
-  ProductRepositoryImpl,
+  UuidAdapter,
   ProductRepositoryPostgresImpl,
 };
