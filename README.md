@@ -38,7 +38,8 @@ The project includes a **Products** domain to demonstrate:
 src/
 ├── domain/                     # Core Business Logic (Pure)
 │   ├── entities/              # Domain entities
-│   ├── repositories/          # Repository interfaces (Ports)
+│   ├── ports/                 # Port interfaces
+│   ├── repositories/          # Repository interfaces
 │   ├── services/              # Domain services
 │   └── value-objects/         # Immutable value objects
 │
@@ -49,7 +50,7 @@ src/
 ├── infrastructure/            # External Adapters
 │   ├── adapters/
 │   │   ├── http/             # HTTP controllers
-│   │   └── persistence/      # Persistence adapters
+│   │   └── id/               # ID generation adapters
 │   └── repositories/         # Repository implementations
 │
 ├── config/                   # Configuration
@@ -68,8 +69,8 @@ src/
 
 - **Runtime**: Node.js
 - **Framework**: Express.js
-- **Database**: PostgreSQL (with in-memory option)
-- **Deployment**: Cloud platform (AWS / GCP)
+- **Database**: PostgreSQL
+- **ID Generation**: UUID (via port/adapter pattern)
 
 ## Getting Started 🏃
 
@@ -90,35 +91,22 @@ The API will be available at `http://localhost:3000`
 
 ```bash
 cp .env.example .env
+# Edit .env with your database credentials
 npm install
-npm run dev      # In-memory storage
-```
-
-### Using PostgreSQL Locally
-
-Set `USE_DATABASE=postgres` in `.env`:
-
-```bash
-USE_DATABASE=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=hex_arch_db
-DB_USER=postgres
-DB_PASSWORD=postgres
+npm start
 ```
 
 ## Environment Variables 🔧
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `NODE_ENV` | development | Environment mode |
-| `PORT` | 3000 | Server port |
-| `USE_DATABASE` | - | Set to `postgres` to use PostgreSQL |
-| `DB_HOST` | localhost | PostgreSQL host |
-| `DB_PORT` | 5432 | PostgreSQL port |
-| `DB_NAME` | hex_arch_db | Database name |
-| `DB_USER` | postgres | Database user |
-| `DB_PASSWORD` | postgres | Database password |
+| Variable | Description |
+|----------|-------------|
+| `NODE_ENV` | Environment mode |
+| `PORT` | Server port |
+| `DB_HOST` | PostgreSQL host |
+| `DB_PORT` | PostgreSQL port |
+| `DB_NAME` | Database name |
+| `DB_USER` | Database user |
+| `DB_PASSWORD` | Database password |
 
 ## License 📄
 
