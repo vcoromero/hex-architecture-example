@@ -1,3 +1,4 @@
+const { NotFoundError, ValidationError } = require('../../../shared');
 const AdjustStockCommand = require('../../dtos/AdjustStockCommand');
 const ProductResponse = require('../../dtos/ProductResponse');
 
@@ -13,12 +14,12 @@ class AdjustStock {
 
     const product = await this.productRepository.findById(adjustCommand.id);
     if (!product) {
-      throw new Error(`Product with ID ${adjustCommand.id} not found`);
+      throw new NotFoundError(`Product with ID ${adjustCommand.id} not found`);
     }
 
     const newQuantity = product.stock.quantity + adjustCommand.amount;
     if (newQuantity < 0) {
-      throw new Error('Stock cannot be negative');
+      throw new ValidationError('Stock cannot be negative');
     }
 
     product.adjustStock(adjustCommand.amount);

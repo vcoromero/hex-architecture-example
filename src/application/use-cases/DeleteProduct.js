@@ -1,3 +1,5 @@
+const { ValidationError, NotFoundError } = require('../../../shared');
+
 class DeleteProduct {
   constructor(productRepository) {
     this.productRepository = productRepository;
@@ -5,12 +7,12 @@ class DeleteProduct {
 
   async execute(id) {
     if (!id) {
-      throw new Error('Product ID is required');
+      throw new ValidationError('Product ID is required');
     }
 
     const product = await this.productRepository.findById(id);
     if (!product) {
-      throw new Error(`Product with ID ${id} not found`);
+      throw new NotFoundError(`Product with ID ${id} not found`);
     }
 
     await this.productRepository.delete(id);

@@ -1,21 +1,7 @@
-class ProductRepository {
-  async findById(id) {
-    throw new Error('Method not implemented');
-  }
+const BaseRepository = require('./BaseRepository');
 
-  async findAll(filters = {}) {
-    throw new Error('Method not implemented');
-  }
-
+class ProductRepository extends BaseRepository {
   async findByName(name) {
-    throw new Error('Method not implemented');
-  }
-
-  async save(product) {
-    throw new Error('Method not implemented');
-  }
-
-  async delete(id) {
     throw new Error('Method not implemented');
   }
 

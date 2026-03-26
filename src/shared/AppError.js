@@ -1,10 +1,15 @@
-class AppError extends Error {
-  constructor(message, statusCode = 500) {
-    super(message);
-    this.statusCode = statusCode;
-    this.isOperational = true;
-    Error.captureStackTrace(this, this.constructor);
+const AppError = require('./AppError');
+
+class ValidationError extends AppError {
+  constructor(message) {
+    super(message, 400);
   }
 }
 
-module.exports = AppError;
+class NotFoundError extends AppError {
+  constructor(message) {
+    super(message, 404);
+  }
+}
+
+module.exports = { AppError, ValidationError, NotFoundError };

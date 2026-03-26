@@ -1,4 +1,4 @@
-const AppError = require('./AppError');
+const { AppError, ValidationError, NotFoundError } = require('./AppError');
 
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
@@ -6,5 +6,7 @@ const asyncHandler = (fn) => (req, res, next) => {
 
 module.exports = {
   AppError,
+  ValidationError,
+  NotFoundError,
   asyncHandler,
 };

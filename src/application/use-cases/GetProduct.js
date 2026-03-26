@@ -1,3 +1,4 @@
+const { ValidationError, NotFoundError } = require('../../../shared');
 const ProductResponse = require('../../dtos/ProductResponse');
 
 class GetProduct {
@@ -7,11 +8,11 @@ class GetProduct {
 
   async execute(id) {
     if (!id) {
-      throw new Error('Product ID is required');
+      throw new ValidationError('Product ID is required');
     }
     const product = await this.productRepository.findById(id);
     if (!product) {
-      throw new Error(`Product with ID ${id} not found`);
+      throw new NotFoundError(`Product with ID ${id} not found`);
     }
     return new ProductResponse(product);
   }

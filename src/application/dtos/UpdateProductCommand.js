@@ -1,3 +1,5 @@
+const { ValidationError } = require('../../../shared');
+
 class UpdateProductCommand {
   constructor({ id, name, description, price, stock }) {
     this.id = id;
@@ -10,19 +12,19 @@ class UpdateProductCommand {
 
   validate() {
     if (!this.id) {
-      throw new Error('Product ID is required');
+      throw new ValidationError('Product ID is required');
     }
     if (this.name !== undefined && this.name.trim().length === 0) {
-      throw new Error('Name cannot be empty');
+      throw new ValidationError('Name cannot be empty');
     }
     if (this.description !== undefined && this.description.trim().length === 0) {
-      throw new Error('Description cannot be empty');
+      throw new ValidationError('Description cannot be empty');
     }
     if (this.price !== undefined && (typeof this.price !== 'number' || this.price < 0)) {
-      throw new Error('Price must be a non-negative number');
+      throw new ValidationError('Price must be a non-negative number');
     }
     if (this.stock !== undefined && (typeof this.stock !== 'number' || this.stock < 0)) {
-      throw new Error('Stock must be a non-negative number');
+      throw new ValidationError('Stock must be a non-negative number');
     }
   }
 }

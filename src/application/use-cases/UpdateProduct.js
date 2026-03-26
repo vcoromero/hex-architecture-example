@@ -1,3 +1,4 @@
+const { NotFoundError } = require('../../../shared');
 const UpdateProductCommand = require('../../dtos/UpdateProductCommand');
 const ProductResponse = require('../../dtos/ProductResponse');
 
@@ -13,7 +14,7 @@ class UpdateProduct {
 
     const product = await this.productRepository.findById(updateCommand.id);
     if (!product) {
-      throw new Error(`Product with ID ${updateCommand.id} not found`);
+      throw new NotFoundError(`Product with ID ${updateCommand.id} not found`);
     }
 
     if (updateCommand.name !== undefined) {

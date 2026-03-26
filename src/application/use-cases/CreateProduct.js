@@ -1,5 +1,6 @@
 const CreateProductCommand = require('../../dtos/CreateProductCommand');
 const ProductResponse = require('../../dtos/ProductResponse');
+const { Product, Money } = require('../../../domain');
 
 class CreateProduct {
   constructor(productRepository) {
@@ -11,7 +12,6 @@ class CreateProduct {
       ? command 
       : new CreateProductCommand(command);
 
-    const { Product, Money } = require('../../../domain');
     const product = new Product(
       this.generateId(),
       createCommand.name,
